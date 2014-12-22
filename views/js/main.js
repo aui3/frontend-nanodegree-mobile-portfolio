@@ -2,6 +2,7 @@
 Welcome to the 60fps project! Your goal is to make Cam's Pizzeria website run
 jank-free at 60 frames per second.
 
+
 There are two major issues in this code that lead to sub-60fps performance. Can
 you spot and fix both?
 
@@ -366,7 +367,7 @@ var pizzaElementGenerator = function(i) {
       pizzaDescriptionContainer,  // contains the pizza title and list of ingredients
       pizzaName,                  // the pizza name itself
       ul;                         // the list of ingredients
-
+     
   pizzaContainer  = document.createElement("div");
   pizzaImageContainer = document.createElement("div");
   pizzaImage = document.createElement("img");
@@ -387,14 +388,28 @@ var pizzaElementGenerator = function(i) {
   pizzaDescriptionContainer.classList.add("col-md-6");
 
   pizzaName = document.createElement("h4");
-  pizzaName.innerHTML = randomName();
+  var pName=randomName();
+  pizzaName.innerHTML = pName;
+  
   pizzaDescriptionContainer.appendChild(pizzaName);
 
   ul = document.createElement("ul");
-  ul.innerHTML = makeRandomPizza();
+  var pList=makeRandomPizza();
+  ul.innerHTML = pList;
   pizzaDescriptionContainer.appendChild(ul);
   pizzaContainer.appendChild(pizzaDescriptionContainer);
+  
+  
+   var HTMLRandomContainerFormat="< div class = 'randomPizzaContainer' id = 'pizza%pizzaNumData%' style = 'width: 585px; height: 325px;' > < div class = 'col-md-6' > < img src = 'images/pizza.png' class = 'img-responsive' > < /div><div class='col-md-6'><h4>%pizzaRandomNameData%</h4 > < ul > %pizzaIngredientsListData%</ul > < /div></div >";
 
+  /*if(i==2) {
+    var HTMLRandomContainerFormat1=HTMLRandomContainerFormat.replace('%pizzaNumData%',i);
+    var HTMLRandomContainerFormat2=HTMLRandomContainerFormat1.replace('%pizzaRandomNameData%',pName);
+    var HTMLRandomContainerFormat3=HTMLRandomContainerFormat2.replace('%pizzaIngredientsListData%',pList);
+    console.log(HTMLRandomContainerFormat3);
+    return HTMLRandomContainerFormat3;
+  }
+*/
   return pizzaContainer;
 }
 
@@ -406,13 +421,13 @@ var resizePizzas = function(size) {
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
-        document.querySelector("#pizzaSize").innerHTML = "Small";
+        document.getElementById("pizzaSize").innerHTML = "Small";
         return;
       case "2":
-        document.querySelector("#pizzaSize").innerHTML = "Medium";
+        document.getElementById("pizzaSize").innerHTML = "Medium";
         return;
       case "3":
-        document.querySelector("#pizzaSize").innerHTML = "Large";
+        document.getElementById("pizzaSize").innerHTML = "Large";
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -424,7 +439,7 @@ var resizePizzas = function(size) {
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
-    var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+    var windowwidth = document.getElementById("randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
     // TODO: change to 3 sizes? no more xl?
@@ -447,13 +462,16 @@ var resizePizzas = function(size) {
 
     return dx;
   }
-
+  /**all pizzas will be changed to one size, so recalculate dx everytime?**/
   // Iterates through pizza elements on the page and changes their widths
+  
   function changePizzaSizes(size) {
-    for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    //compute dx once for one instance on .randomPizzaContainer
+    var dx = determineDx(document.getElementsByClassName("randomPizzaContainer"), size);
+      //console.log(dx);
+    var newwidth = (document.getElementsByClassName("randomPizzaContainer").offsetWidth + dx) + 'px';
+    for (var i = 0; i < document.getElementsByClassName("randomPizzaContainer").length; i++) {
+      document.getElementById("pizza"+i).style.width = newwidth;
     }
   }
 
@@ -471,7 +489,29 @@ window.performance.mark("mark_start_generating"); // collect timing data
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
+  //if (i==2){
+    //var test=pizzaElementGenerator(i);
+    //var escapedtest=test.replace('&lt;','<');
+    //var escapedtest2=escapedtest.replace('&gt;','>');
+    //var textnode=document.createTextNode(test);
+    //pizzasDiv.appendChild(textnode);
+    //console.log(pizzasDiv.innerHTML);
+    //pizzasDiv.innerHTML+=test;
+
+    //var intest=pizzasDiv.innerHTML;
+    //var escapedtest=intest.replace(/&lt;/g,'<');
+    //var escapedtest2=escapedtest.replace(/&gt;/g,'>');
+    //pizzasDiv.innerHTML=escapedtest2;
+    //console.log("escape");
+    //console.log(escapedtest2);
+    //console.log("after");
+    //console.log(pizzasDiv.innerHTML);
+
+  //}
+  //else {
+    
+    pizzasDiv.appendChild(pizzaElementGenerator(i));
+  //}
 }
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
