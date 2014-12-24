@@ -586,7 +586,8 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  //var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -609,15 +610,42 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  var movingPizzaFragment= document.createDocumentFragment();
+  
+  var pizzaLocation;
+  var topBody=document.body.scrollTop;
+  var pizzadrawn=0;
+  var bodyHeight=window.innerHeight;
+  console.log("body height "+ window.innerHeight);
+  console.log("top body "+topBody);
   for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
+    pizzaLocation= Math.floor(i / cols)*s;
+    
+    if (pizzaLocation>=0 && (pizzaLocation+100)<=(bodyHeight)){
+      pizzadrawn++;
+      console.log("pizza location " +pizzaLocation);
+      var elem = document.createElement('img');
+      elem.className = 'mover';
+      elem.src = "images/pizza.png";
+      elem.style.height = "100px";
+      elem.style.width = "73.333px";
+      elem.basicLeft = (i % cols) * s;
+      //console.log(elem.style.left);
+      elem.style.top = (Math.floor(i / cols) * s) + 'px';
+      movingPizzaFragment.appendChild(elem);
+    }
+    /*var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzaFragment.appendChild(elem);
+    */
+   //document.getElementById("movingPizzas1").appendChild(elem);
   }
+  console.log("pizzas drawn " + pizzadrawn);
+  document.getElementById("movingPizzas1").appendChild(movingPizzaFragment);
   updatePositions();
 });
