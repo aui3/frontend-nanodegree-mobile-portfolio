@@ -1,3 +1,0 @@
--Time to resize pizza reduced to 9.4 ms from 32.3 ms
--added fragments. Add fragments to a fragment and then add that fragment to dom.
--DOCUMENT READY...LOAD RANDOM PIZZAS ON DOCUMENT READY
