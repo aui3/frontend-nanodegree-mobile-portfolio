@@ -100,6 +100,34 @@ gulp.task('uncss', function() {
 
 });
 
+//UNCSS Task
+//First rename bootstrap-grid.css to bootstrap-grid-old.css
+//Now uncss it to bootstrap-grid.css, now file ready to be minifies
+//minify it and next inline it 
+
+
+gulp.task('uncssone', function() {
+   
+    //rename to old
+    //gulp.src('css/style.css')
+    //.pipe(rename('css/style-old.css'))
+    //.pipe(gulp.dest('./')); 
+
+
+    gulp.src('css/style.css')
+        .pipe(uncss({
+            //html: ['index.html','project-2048.html','project-mobile.html','project-webperf.html']
+            html: ['index.html']
+        }))
+        .pipe(gulp.dest('css/uncssStyle'));
+
+    //rename back
+    //gulp.src('views/css/style-old.css')
+    //.pipe(rename('views/css/bootstrap-grid.css'))
+    //.pipe(gulp.dest('./'));    
+
+});
+
 //INLINE CSS TASK
 gulp.task('inlineCss', function() {
     return gulp.src('views/pizza.html')
