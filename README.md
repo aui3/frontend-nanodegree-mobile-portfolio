@@ -17,3 +17,7 @@ https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 -All the project source files are inside the <b>app</b> folder. 
 
 -<b>dist</b>(found inside the app folder) has the production (optimized) files.
+
+<h2>Overview</h2>
+
+I am using gulp 
