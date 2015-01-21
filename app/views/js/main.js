@@ -546,8 +546,8 @@ function updatePositions() {
   //var items = document.getElementsByClassName('mover');
   for (var i = 0; i < items.length; i++) {
     phase = phasePart + (i % 5);
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    //items[i].style.transform="translate("+items[i].basicLeft + 100 * phase + "px,0px)";
+    //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform="translate("+items[i].basicLeft + 100 * phase + "px,0px)";
     //console.log(items[i].basicLeft + 100 * phase);
   }
 
@@ -591,7 +591,8 @@ document.addEventListener('DOMContentLoaded', function() {
       elem.src = "images/pizza.png";
       elem.style.height = "100px";
       elem.style.width = "73.333px"; 
-      elem.basicLeft = (i % cols) * s;
+      //elem.basicLeft = (i % cols) * s;
+      elem.style.left=(i % cols) * s+'px';
       elem.style.top = (pizzaLocation) + 'px';
       movingPizzaFragment.appendChild(elem);
     }
