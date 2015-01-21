@@ -547,7 +547,7 @@ function updatePositions() {
   for (var i = 0; i < items.length; i++) {
     phase = phasePart + (i % 5);
     //items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-    items[i].style.transform="translate("+items[i].basicLeft + 100 * phase + "px,0px)";
+    items[i].style.transform="translate("+ 100 * phase + "px,0px)";
     //console.log(items[i].basicLeft + 100 * phase);
   }
 
