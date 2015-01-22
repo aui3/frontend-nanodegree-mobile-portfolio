@@ -20,4 +20,6 @@ https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 
 <h2>Overview</h2>
 
-I am using gulp 
+I am using Gulp build tools and Data URI conversions to acheive content efficiency.
+
+Optimizations:
