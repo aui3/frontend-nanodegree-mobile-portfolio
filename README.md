@@ -24,6 +24,16 @@ I am using Gulp build tools and Data URI conversions to acheive content efficien
 
 <h3>Optimizations:</h3>
 
+-<b>Content Efficiency Optimizations</b>
+
+I am using gulp to acheive content efficiency. In the gulpfile.js located in the <em>'app'</em> I have used the following plugins:
+ -gulp-uglify: To uglify all the script files
+ -gulp-minify-css : To minify all style files
+ -gulp-image-optimization : For image optimization
+ -gulp-minify-html : Minify Html files
+ - The default gulp task includes all the above plugins
+ -gulp-uncss : Used once, (not as part of default task) to remove extra styles from bootstrap and style.css that are not used in the html files. 
+
 -<b>index.html</b>
 
 -Separating style sheets based of media type. Make style sheet of media type "print" render unblocking by adding media="print" while linking to print.css
@@ -31,5 +41,20 @@ I am using Gulp build tools and Data URI conversions to acheive content efficien
 - Add 'async' attributes to scripts that need not be render-blocking (i.e. load these scripts after the initial page load) [analytics.js and perfmatters.js]. I removed the inline <script></script> tags from index.html and put the render blodking js code in analytics.js and used 'async' atrribute to ensure this script does not render blocking.
 
 - Inline styles to reduce the number of critical resources. I used gulp <em>uncss</em> plugin to remove styles from style.css that were not used in index.html. Then I copied all the remaining styles and inlined them in index.html inside the <style></style> tags
- 
+
+-Date URI Conversion. I have used Data URI coversion to optimize pizzeria.jpg. Image data is represented as a string and embedded directly in the index.html.
+
 -<b>main.js</b>
+
+ -One: The first optimization I made is at var <em>pizzaElementGenerator = function(i) {…}</em>, line 366 where instead of returning a DOM   element, the function returns a document fragment. appendChild(..) calls to the DOM are replaced with appendChild(…) to the document fragment thus avoiding expensive DOM manipulations
+
+ -Two: Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
+
+ -Three: <em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
+
+ -Line 500, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
+
+ -In function updatePositions(), line 536, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’
+
+ -Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
+
