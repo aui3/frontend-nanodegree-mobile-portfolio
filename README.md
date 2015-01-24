@@ -26,4 +26,10 @@ Optimizations:
 
 -<b>index.html</b>
 
+-Separating style sheets based of media type. Make style sheet of media type "print" render unblocking by adding media="print" while linking to print.css
+
+- Add 'async' attributes to scripts that need not be render-blocking (i.e. load these scripts after the initial page load) [analytics.js and perfmatters.js]. I removed the inline <script></script> tags from index.html and put the render blodking js code in analytics.js and used 'async' atrribute to ensure this script does not render blocking.
+
+- Inline styles to reduce the number of critical resources. I used gulp <em>uncss</em> plugin to remove styles from style.css that were not used in index.html. Then I copied all the remaining styles and inlined them in index.html inside the <style></style> tags
+ 
 -<b>main.js</b>
