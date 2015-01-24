@@ -46,13 +46,13 @@ I am using gulp to acheive content efficiency. In the gulpfile.js located in the
 
 -<b>main.js</b>
 
- -One: The first optimization I made is at var <em>pizzaElementGenerator = function(i) {…}</em>, line 366 where instead of returning a DOM   element, the function returns a document fragment. appendChild(..) calls to the DOM are replaced with appendChild(…) to the document fragment thus avoiding expensive DOM manipulations
+ -One:  &nbsp;&nbsp;&nbsp;The first optimization I made is at var <em>pizzaElementGenerator = function(i) {…}</em>, line 366 where instead of returning a DOM   element, the function returns a document fragment. appendChild(..) calls to the DOM are replaced with appendChild(…) to the document fragment thus avoiding expensive DOM manipulations
 
- -Two: Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
+ -Two:  Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
 
- -Three: <em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
+ -Three:  <em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
 
- -Line 500, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
+ -Four: Line 504, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
 
  -In function updatePositions(), line 536, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’
 
