@@ -23,6 +23,7 @@ https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 I am using Gulp build tools and Data URI conversions to acheive content efficiency.
 
 Optimizations:
+
 -<b>index.html</b>
 
 -<b>main.js</b>
