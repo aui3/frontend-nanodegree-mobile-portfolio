@@ -48,13 +48,13 @@ I am using gulp to acheive content efficiency. In the gulpfile.js located in the
 
  -One:  &nbsp;&nbsp;&nbsp;The first optimization I made is at var <em>pizzaElementGenerator = function(i) {…}</em>, line 366 where instead of returning a DOM   element, the function returns a document fragment. appendChild(..) calls to the DOM are replaced with appendChild(…) to the document fragment thus avoiding expensive DOM manipulations
 
- -Two:  Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
+ -Two:  &nbsp;&nbsp;&nbsp;Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
 
- -Three:  <em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
+ -Three:  &nbsp;&nbsp;&nbsp;<em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
 
- -Four: Line 504, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
+ -Four: &nbsp;&nbsp;&nbsp;Line 504, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
 
- -In function updatePositions(), line 536, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’
+ - Five: &nbsp;&nbsp;&nbsp; In function <em>updatePositions()</em>, line 539, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’. Using transfor:translate instead of style.left which is a more expensive DOM manipulation method.
 
- -Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
+ -Six: &nbsp;&nbsp;&nbsp;Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
 
