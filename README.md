@@ -18,11 +18,11 @@ https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 
 -<b>dist</b>(found inside the app folder) has the production (optimized) files.
 
-<h2>Overview</h2>
+<h3>Overview</h3>
 
 I am using Gulp build tools and Data URI conversions to acheive content efficiency.
 
-Optimizations:
+<h3>Optimizations:</h3>
 
 -<b>index.html</b>
 
