@@ -57,4 +57,23 @@ I am using gulp to acheive content efficiency. In the gulpfile.js located in the
  -Five: &nbsp;&nbsp;&nbsp; In function <em>updatePositions()</em>, line 539, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’. Using transfor:translate instead of style.left which is a more expensive DOM manipulation method.
 
  -Six: &nbsp;&nbsp;&nbsp;Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
+ 
+ 
+ <h2>References </h2>
+ 
+ -http://www.justinmccandless.com/blog/A+Tutorial+for+Getting+Started+with+Gulp
+ 
+ -https://www.youtube.com/playlist?list=PLLnpHn493BHE2RsdyUNpbiVn-cfuV7Fos
 
+ -https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
+
+ -http://duri.me/
+ 
+ -https://developers.google.com/web/fundamentals/performance/
+ 
+ 
+ Honor Code:
+ 
+ I hereby confirm that this submission is my work. I have cited above the origins of any parts of the submission that were taken from Websites, books, forums, blog posts, github repositories, etc. By including this in my email, I understand that I will be expected to explain my work in a video call with a Udacity coach before I can receive my verified certificate.”
+
+-https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function
