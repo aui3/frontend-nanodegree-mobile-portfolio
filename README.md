@@ -54,7 +54,7 @@ I am using gulp to acheive content efficiency. In the gulpfile.js located in the
 
  -Four: &nbsp;&nbsp;&nbsp;Line 504, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
 
- - Five: &nbsp;&nbsp;&nbsp; In function <em>updatePositions()</em>, line 539, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’. Using transfor:translate instead of style.left which is a more expensive DOM manipulation method.
+ -Five: &nbsp;&nbsp;&nbsp; In function <em>updatePositions()</em>, line 539, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’. Using transfor:translate instead of style.left which is a more expensive DOM manipulation method.
 
  -Six: &nbsp;&nbsp;&nbsp;Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
 
