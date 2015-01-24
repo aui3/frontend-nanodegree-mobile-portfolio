@@ -67,6 +67,8 @@ I am using gulp to acheive content efficiency. In the gulpfile.js located in the
 
  -https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
 
+ -http://webdesign.tutsplus.com/articles/the-what-why-and-how-of-data-uris-in-web-design--webdesign-8648
+
  -http://duri.me/
  
  -https://developers.google.com/web/fundamentals/performance/
