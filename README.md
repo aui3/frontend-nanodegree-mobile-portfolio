@@ -8,7 +8,7 @@
 
 http://aui3.github.io/frontend-nanodegree-mobile-portfolio/app/dist/
 
-<b>The production files are avaiable at:</b>
+<b>The developer's files are avaiable at:</b>
 
 https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 
@@ -23,3 +23,5 @@ https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 I am using Gulp build tools and Data URI conversions to acheive content efficiency.
 
 Optimizations:
+-<b>index.html</b>
+-<b>main.js</b>
