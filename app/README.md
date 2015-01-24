@@ -1,65 +1,79 @@
-## Website Performance Optimization portfolio project
+<h1>Website Optimization Project</h1>
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+<h2>Goal</h2>
+-Optimize index.html to acheive above 90 score for Page Speed Insight
+-Optimize pizza.html (main.js) to acheive a 60 FPS reading
 
-To get started, check out the repository, inspect the code,
+<b>The optimized site can be accessed at this link:</b> 
 
-### Getting started
+http://aui3.github.io/frontend-nanodegree-mobile-portfolio/app/dist/
 
-Some useful tips to help you get started:
+<b>The developer's files are avaiable at:</b>
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+https://github.com/aui3/frontend-nanodegree-mobile-portfolio/tree/master/app
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+<h2>Project folder Hierarchy</h2>
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+-All the project source files are inside the <b>app</b> folder. 
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
+-<b>dist</b>(found inside the app folder) has the production (optimized) files.
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+<h3>Overview</h3>
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+I am using Gulp build tools and Data URI conversions to acheive content efficiency.
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+<h3>Optimizations:</h3>
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+-<b>Content Efficiency Optimizations</b>
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+I am using gulp to acheive content efficiency. In the gulpfile.js located in the <em>'app'</em> I have used the following plugins:
+ -gulp-uglify: To uglify all the script files
+ -gulp-minify-css : To minify all style files
+ -gulp-image-optimization : For image optimization
+ -gulp-minify-html : Minify Html files
+ - The default gulp task includes all the above plugins
+ -gulp-uncss : Used once, (not as part of default task) to remove extra styles from bootstrap and style.css that are not used in the html files. 
 
-### Sample Portfolios
+-<b>index.html</b>
 
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
+-Separating style sheets based of media type. Make style sheet of media type "print" render unblocking by adding media="print" while linking to print.css
 
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+- Add 'async' attributes to scripts that need not be render-blocking (i.e. load these scripts after the initial page load) [analytics.js and perfmatters.js]. I removed the inline <script></script> tags from index.html and put the render blodking js code in analytics.js and used 'async' atrribute to ensure this script does not render blocking.
+
+- Inline styles to reduce the number of critical resources. I used gulp <em>uncss</em> plugin to remove styles from style.css that were not used in index.html. Then I copied all the remaining styles and inlined them in index.html inside the <style></style> tags
+
+-Date URI Conversion. I have used Data URI coversion to optimize pizzeria.jpg. Image data is represented as a string and embedded directly in the index.html.
+
+-<b>main.js</b>
+
+ -One:  &nbsp;&nbsp;&nbsp;The first optimization I made is at var <em>pizzaElementGenerator = function(i) {…}</em>, line 366 where instead of returning a DOM   element, the function returns a document fragment. appendChild(..) calls to the DOM are replaced with appendChild(…) to the document fragment thus avoiding expensive DOM manipulations
+
+ -Two:  &nbsp;&nbsp;&nbsp;Line 425 In <em>resizePizzas(size)</em>, use getElementsById instead of the expensive querySelector DOM manipulation calls.
+
+ -Three:  &nbsp;&nbsp;&nbsp;<em>changePizzaSizes()</em> Line(479) move repeating calculations from out side the for loop and replace theree querySelectorAll() calls with just one getElementsById call and saving it in a variable PizzaCon
+
+ -Four: &nbsp;&nbsp;&nbsp;Line 504, move the generation of all pizza till after the DOM completion event to optimize page load time. Further optimize this by using a Document Fragment and appending all the random pizzas to a fragment and outside the for loop in just one DOM manipulation append the fragment to the DOM. Also move the calculation of pizzDiv outside the for loop since it is unnecessarily repeated.
+
+ -Five: &nbsp;&nbsp;&nbsp; In function <em>updatePositions()</em>, line 539, put the variable ‘items’ in global scope because this will be used every time a scroll is made and it will store all elements with class ‘mover’. Using transfor:translate instead of style.left which is a more expensive DOM manipulation method.
+
+ -Six: &nbsp;&nbsp;&nbsp;Line 577, use a Document Fragment to append all the pizza elements to this fragment first and then attach the fragment to the DOM. Also, based upon the location of the pizzas, if they are visible on the screen, only then add them to the fragment to display them.
+ 
+ 
+ <h2>References </h2>
+ 
+ -http://www.justinmccandless.com/blog/A+Tutorial+for+Getting+Started+with+Gulp
+ 
+ -https://www.youtube.com/playlist?list=PLLnpHn493BHE2RsdyUNpbiVn-cfuV7Fos
+
+ -https://github.com/gulpjs/gulp/blob/master/docs/recipes/delete-files-folder.md
+
+ -http://duri.me/
+ 
+ -https://developers.google.com/web/fundamentals/performance/
+ 
+ 
+ Honor Code:
+ 
+ I hereby confirm that this submission is my work. I have cited above the origins of any parts of the submission that were taken from Websites, books, forums, blog posts, github repositories, etc. By including this in my email, I understand that I will be expected to explain my work in a video call with a Udacity coach before I can receive my verified certificate.”
+
+-https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function
