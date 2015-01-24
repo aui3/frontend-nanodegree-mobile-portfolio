@@ -18,17 +18,20 @@ var bases ={
 	dist: 'dist/'//production directory
 };
 
-
+/**
+* Specify Paths for all the files in the project to be used and not used.
+*/
 var paths = {
 	scripts: ['**/*.js','!node_modules/**','!gulpfile.js'],
 	styles: [ '**/*.css', '!views/css/bootstrap-grid-old.css','!node_modules/**'],
 	html: ['*.html', '**/*.html','!node_modules/**'],
 	images: ['**/*.jpg','**/*.png','!node_modules/**']
-	//images: ['img/*.jpg']
+	
 };
 
-
-//Minify HTML Task
+/**
+*Minify HTML Task
+*/
 gulp.task('minify-html' ,['clean'], function() {
     var opts = {comments:true,spare:true};
 
@@ -37,8 +40,10 @@ gulp.task('minify-html' ,['clean'], function() {
     .pipe(gulp.dest(bases.dist))
 });
 
-//Image Optimization Task
-//optimizes images
+/**
+* Image Optimization Task
+* optimizes images
+*/
 gulp.task('images',['clean'], function(cb) {
     gulp.src(paths.images).pipe(imageoptim({
         optimizationLevel: 5,
@@ -47,24 +52,30 @@ gulp.task('images',['clean'], function(cb) {
     })).pipe(gulp.dest(bases.dist)).on('end', cb).on('error', cb);
 });
 
-//Clean Task
-//deletes dist directory
+/**
+* Clean Task
+* deletes dist directory
+*/
 gulp.task('clean',function (cb){
 	
      del(['dist/**'], cb);
 
 });
 
-//Scripts Task
-//Uglifies Javascript files
+/**
+* Scripts Task
+* Uglifies Javascript files
+*/
 gulp.task('scripts',['clean'], function(){
 	gulp.src(paths.scripts).on('error', errorHandler)//load files
 	.pipe(uglify())//uglify them
 	.pipe(gulp.dest(bases.dist));//save in minjs
 });
 
-//Styles Task
-//Minifies all css
+/**
+* Styles Task
+* Minifies all css
+*/
 gulp.task('styles',['clean'],function(){
 	gulp.src(paths.styles).on('error', errorHandler)//load files
 	.pipe(minifycss({keepSpecialComments:0}))//remove all comments
@@ -72,11 +83,11 @@ gulp.task('styles',['clean'],function(){
 	
 });
 
-//UNCSS Task
-//First rename bootstrap-grid.css to bootstrap-grid-old.css
-//Now uncss it to bootstrap-grid.css, now file ready to be minifies
-//minify it and next inline it 
-
+/**
+* UNCSS Task
+* First rename bootstrap-grid.css to bootstrap-grid-old.css
+* Now uncss it to bootstrap-grid.css, now file ready to be minifies
+*/
 
 gulp.task('uncss', function() {
    
@@ -88,7 +99,6 @@ gulp.task('uncss', function() {
 
     gulp.src('views/css/bootstrap-grid-old.css')
         .pipe(uncss({
-            //html: ['index.html','project-2048.html','project-mobile.html','project-webperf.html']
         	html: ['views/pizza.html']
         }))
         .pipe(gulp.dest('views/css/'));
@@ -100,33 +110,34 @@ gulp.task('uncss', function() {
 
 });
 
-//UNCSS Task
-//First rename bootstrap-grid.css to bootstrap-grid-old.css
-//Now uncss it to bootstrap-grid.css, now file ready to be minifies
-//minify it and next inline it 
-
+/**
+* UNCSS Task
+* Remove extra css from style.css and save it separately in uncssStyle Folder. I will inline this file inside the
+* index.html file. This task is not part of the default task. and once run, the optimized css file is going to be a part of index.html
+* for future optimizations
+**/
 
 gulp.task('uncssone', function() {
    
-    //rename to old
-    //gulp.src('css/style.css')
-    //.pipe(rename('css/style-old.css'))
-    //.pipe(gulp.dest('./')); 
-
-
     gulp.src('css/style.css')
         .pipe(uncss({
             //html: ['index.html','project-2048.html','project-mobile.html','project-webperf.html']
             html: ['index.html']
         }))
-        .pipe(gulp.dest('css/uncssStyle'));
-
-    //rename back
-    //gulp.src('views/css/style-old.css')
-    //.pipe(rename('views/css/bootstrap-grid.css'))
-    //.pipe(gulp.dest('./'));    
-
+        .pipe(gulp.dest('css/uncssStyle'));    
 });
+
+
+/**
+* The default gulp task will optimizide the scripts, styles, images and all html files and 
+* create optimized production files in the dist folder.
+*/
+gulp.task('default',['scripts','styles','images','minify-html']);
+// Handle the error
+function errorHandler (error) {
+  console.log(error.toString());
+  this.emit('end');
+}
 
 //INLINE CSS TASK
 gulp.task('inlineCss', function() {
@@ -135,20 +146,9 @@ gulp.task('inlineCss', function() {
         .pipe(gulp.dest('build/'));
 });
 
+//watch task
 gulp.task('watch',function(){
-	
-	//var server=livereload();
 
-	gulp.watch('js/*.js',['scripts']);
-	gulp.watch('css/*.css',['styles']);
+    gulp.watch('js/*.js',['scripts']);
+    gulp.watch('css/*.css',['styles']);
 });
-
-
-gulp.task('default',['scripts','styles','images','minify-html']);
-	//gulp.task('default',['minify-html']);
-
-// Handle the error
-function errorHandler (error) {
-  console.log(error.toString());
-  this.emit('end');
-}
