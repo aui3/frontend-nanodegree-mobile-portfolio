@@ -24,4 +24,5 @@ I am using Gulp build tools and Data URI conversions to acheive content efficien
 
 Optimizations:
 -<b>index.html</b>
+
 -<b>main.js</b>
